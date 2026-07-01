@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<launch>
+    <arg name="scan_raw" default="/scan_raw"/>
+    <arg name="scan_filtered" default="/scan"/>
+    <arg name="lidar_frame" default="lidar_link"/>
+
+    <include file="$(find pug_peripherals)/launch/include/ms200_scan.launch">
+        <arg name="scan_raw" value="$(arg scan_raw)"/>
+        <arg name="lidar_frame" value="$(arg lidar_frame)"/>
+    </include>
+    <node pkg="laser_filters" type="scan_to_scan_filter_chain" output="screen" name="front_laser">
+        <rosparam command="load" file="$(find pug_peripherals)/config/laser_filter.yaml" />
+        <remap from="/scan"  to="$(arg scan_raw)"/>
+        <remap from="/scan_filtered"  to="$(arg scan_filtered)"/>
+    </node>
+</launch>

@@ -1,0 +1,5 @@
+<?xml version="1.0" ?>
+<launch>
+    <node name="oled_set_i2c_rate" pkg="pug_peripherals" type="set_i2c_rate.sh" />
+    <node name="oled_display_node" pkg="pug_peripherals" type="oled_display.py" output="screen" respawn="true" ns="oled_display"/>
+</launch>

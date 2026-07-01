@@ -1,0 +1,4 @@
+<?xml version="1.0" ?>
+<launch>
+	<node name="face_detect" pkg="pug_app" type="face_detect.py" output="screen" respawn="true"/>
+</launch>

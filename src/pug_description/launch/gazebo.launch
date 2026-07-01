@@ -1,0 +1,39 @@
+<launch>
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+      <arg name="world_name" value="world/empty.world"/>
+      <arg name="debug" value="false" />
+      <arg name="gui" value="true" />
+      <arg name="paused" value="true"/>
+      <arg name="use_sim_time" value="true"/>
+      <arg name="headless" value="false"/>
+  </include>
+
+  <param name="robot_description" command="$(find xacro)/xacro $(find pug_description)/urdf/pug.urdf.xacro"/>
+  <node
+    name="spawn_model"
+    pkg="gazebo_ros"
+    type="spawn_model"
+    args="-urdf -model pug -param robot_description "
+    output="screen" />
+
+  <rosparam file="$(find pug_description)/config/gazebo_control.yaml" command="load"/>
+
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" ns="/pug"
+    output="screen" args="joint_state_controller
+                          rf_joint_position_controller
+                          rf_calf_position_controller
+                          rf_thigh_position_controller
+                          lf_joint_position_controller
+                          lf_calf_position_controller
+                          lf_thigh_position_controller
+                          rb_joint_position_controller
+                          rb_calf_position_controller
+                          rb_thigh_position_controller
+                          lb_joint_position_controller
+                          lb_calf_position_controller
+                          lb_thigh_position_controller"/>
+    <!-- 运行robot_state_publisher节点，发布tf  -->
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
+        <remap from="/joint_states" to="/pug/joint_states" />
+    </node>
+</launch>

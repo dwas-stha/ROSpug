@@ -1,0 +1,76 @@
+TebLocalPlannerROS:
+  odom_topic: /odom
+  map_frame: odom
+
+  # Trajectory
+  teb_autosize: true
+  dt_ref: 0.3
+  dt_hysteresis: 0.1 # 根据当前时间分辨率自动调整大小的滞后，通常约为。建议使用10% 的dt_ref
+  global_plan_overwrite_orientation: True # 覆盖全局规划器提供的局部子目标的方向（因为它们通常只提供二维路径）
+  max_global_plan_lookahead_dist: 1.0
+  feasibility_check_no_poses: 5
+  exact_arc_length: true
+
+  # Robot
+  max_vel_x: 0.15
+ #  max_vel_y: 0.3    #差速导航注释掉此行
+  max_vel_x_backwards: 0.15
+  max_vel_theta: 0.5
+  acc_lim_x: 0.2
+  #  acc_lim_y: 0.1   #差速导航注释掉此行
+  acc_lim_theta: 0.5
+  min_turning_radius: 0.0
+  footprint_model: # types: "point", "circular", "two_circles", "line", "polygon"
+    type: "circular"
+    radius: 0.01 # for type "circular"
+    #vertices: [[-0.15, -0.1], [-0.15, 0.1],[0.15, 0.1], [0.15, -0.1]]
+    #vertices: [[-0.1, -0.26], [-0.1, 0.26],[0.287, 0.26], [0.287, -0.26]]
+  decel_width: 0.2
+
+
+  # GoalTolerance目标容差参数
+  xy_goal_tolerance: 0.3
+  yaw_goal_tolerance: 0.7
+  free_goal_vel: False
+
+  # Obstacles障碍物参数
+  min_obstacle_dist: 0.2
+  include_costmap_obstacles: True
+  costmap_obstacles_behind_robot_dist: 1.0
+  obstacle_poses_affected: 7
+  costmap_converter_plugin: ""
+  costmap_converter_spin_thread: True
+  costmap_converter_rate: 5
+
+  # Optimization优化参数
+  no_inner_iterations: 5
+  no_outer_iterations: 4
+  optimization_activate: True
+  optimization_verbose: False
+  penalty_epsilon: 0.03
+  weight_max_vel_x: 1
+ #  weight_max_vel_y: 1                #差速导航注释掉此行
+  weight_max_vel_theta: 1
+  weight_acc_lim_x: 1
+ #  weight_acc_lim_y: 1                #差速导航注释掉此行
+  weight_acc_lim_theta: 1
+  weight_kinematics_nh: 1000            # 满足非完整运动学的优化权重（此参数必须很高，因为运动学方程构成等式约束，即使值 1000 也不意味着由于与其他成本相比较小的“原始”成本值而导致矩阵条件不佳）
+  weight_kinematics_forward_drive: 1000 # 强制机器人仅选择前向（正平移速度）的优化权重。较小的重量（例如 1.0）仍然允许向后行驶。1000 左右的值几乎可以防止向后行驶（但不能保证）。
+  weight_kinematics_turning_radius: 1
+  weight_optimaltime: 1
+  weight_obstacle: 50
+  weight_dynamic_obstacle: 10 # not in use yet
+  selection_alternative_time_cost: False # not in use yet
+
+  # Homotopy Class Planner
+  enable_homotopy_class_planning: False
+  enable_multithreading: True
+  simple_exploration: False
+  max_number_classes: 4
+  roadmap_graph_no_samples: 15
+  roadmap_graph_area_width: 5
+  h_signature_prescaler: 0.5
+  h_signature_threshold: 0.1
+  obstacle_keypoint_offset: 0.1
+  obstacle_heading_threshold: 0.45
+  visualize_hc_graph: False

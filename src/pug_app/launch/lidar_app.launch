@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<launch>
+	<node name="lidar_app" pkg="pug_app" type="lidar_app.py" output="screen" respawn="true"/>
+</launch>

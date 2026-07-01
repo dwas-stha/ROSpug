@@ -1,0 +1,4 @@
+<?xml version="1.0" ?>
+<launch>
+	<node name="performance" pkg="pug_app" type="performance.py" output="screen" respawn="false"/>
+</launch>

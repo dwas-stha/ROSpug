@@ -1,0 +1,24 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${workspaceFolder}/.vscode/browse.vc.db",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/home/hiwonder/pug/devel/include/**",
+        "/opt/ros/melodic/include/**",
+        "/home/hiwonder/pug/src/third_party/imu_calib/include/**",
+        "/home/hiwonder/pug/src/third_party/imu_tools/imu_complementary_filter/include/**",
+        "/home/hiwonder/pug/src/third_party/imu_tools/imu_filter_madgwick/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-arm64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}

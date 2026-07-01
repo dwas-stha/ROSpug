@@ -1,0 +1,827 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot name="pug" xmlns:xacro="http://ros.org/wiki/xacro">
+
+    <xacro:property name="joint_effort" value="6.0" />
+    <xacro:property name="joint_velocity" value="0.524" />
+
+    <!-- <xacro:include filename="$(find pug_description)/urdf/pug.transmission.xacro"/> -->
+    <!-- <xacro:include filename="$(find pug_description)/urdf/pug.gazebo.xacro"/> -->
+    
+    <xacro:include filename="pug.transmission.xacro"/>
+    <xacro:include filename="pug.gazebo.xacro"/>
+    
+    <material name="black">
+        <color rgba="0.1 0.1 0.1 1.0"/>
+    </material>
+
+    <material name="blue">
+        <color rgba="0.0 0.0 0.8 1.0"/>
+    </material>
+
+    <material name="green">
+        <color rgba="0.4 0.9 0.4 1.0"/>
+    </material>
+
+    <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+    </material>
+
+    <material name="darkgray">
+        <color rgba="0.3 0.3 0.3 1.0"/>
+    </material>
+
+    <material name="red">
+        <color rgba="0.8 0.0 0.0 1.0"/>
+    </material>
+
+    <material name="white">
+        <color rgba="1.0 1.0 1.0 1.0"/>
+    </material>
+
+    <material name="yellow">
+        <color rgba="0.8 0.8 0.0 1.0"/>
+    </material>
+
+  <link name="base_footprint">
+    <visual>
+        <geometry>  
+             <box size="0.001 0.001 0.001"/> 
+        </geometry> 
+    </visual>
+  </link>
+  <joint name="base2footprint" type="fixed">
+        <parent link="base_footprint"/>
+        <child link="base_link"/>
+        <origin xyz="0 0 0.10947" rpy="0 0 0"/>
+    </joint>
+  <link
+    name="imu_link">
+  </link>
+  <joint name="imu2footprint" type="fixed">
+        <parent link="base_footprint"/>
+        <child link="imu_link"/>
+        <origin xyz="0 0 0.10947" rpy="0 0 1.57"/>
+  </joint>
+
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="-0.00107439056830567 1.09225560675635E-05 0.0420077110093663"
+        rpy="0 0 0" />
+      <mass
+        value="0.245368525919973" />
+      <inertia
+        ixx="0.000182677915529448"
+        ixy="1.06078729333106E-07"
+        ixz="8.67760257656377E-06"
+        iyy="0.000520324409384797"
+        iyz="-1.82106985674112E-07"
+        izz="0.000588448061895212" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://pug_description/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="black">
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://pug_description/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="lidar_link">
+    <inertial>
+      <origin
+        xyz="8.9234175604247E-15 7.35822586034676E-05 -0.0190798857039478"
+        rpy="0 0 0" />
+      <mass
+        value="0.0420835165583885" />
+      <inertia
+        ixx="8.44009115204719E-06"
+        ixy="-4.57987558339917E-18"
+        ixz="-2.72353060584537E-18"
+        iyy="8.5166554525854E-06"
+        iyz="3.92887379946602E-08"
+        izz="8.4281775503443E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://pug_description/meshes/lidy_Link.STL" />
+      </geometry>
+      <material
+        name="black">
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://pug_description/meshes/lidy_Link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="lidy"
+    type="fixed">
+    <origin
+      xyz="0.0985052579265076 3.11681485234278E-05 0.095407538382903"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="lidar_link" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+  <link
+    name="joint_Link_2">
+    <inertial>
+      <origin
+        xyz="0.0152860161015012 0.00256702691106833 0.0105250884931537"
+        rpy="0 0 0" />
+      <mass
+        value="0.0477325853318043" />
+      <inertia
+        ixx="1.18150987935688E-05"
+        ixy="2.78210862656238E-07"
+        ixz="2.12445570902652E-07"
+        iyy="1.36039006083195E-05"
+        iyz="-3.91455115820011E-07"
+        izz="6.75186247518628E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://pug_description/meshes/joint_Link_2.STL" />
+      </geometry>
+      <material
+        name="black">
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://pug_description/meshes/joint_Link_2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="lf_joint"
+    type="revolute">
+    <origin
+      xyz="0.078609 0.024279 0.019551"
+      rpy="1.5709 0.010048 1.577" />
+    <parent
+      link="base_link" />
+    <child
+      link="joint_Link_2" />
+    <axis
+      xyz="-0.0061711 0 0.99998" />
+    <limit
+      lower="-2"
+      upper="2"
+      effort="${joint_effort}"
+      velocity="2" />
+  </joint>
+  <link
+    name="thigh_Link_2">
+    <inertial>
+      <origin
+        xyz="0.0142156364497646 0.00285749959949951 -0.00044377411913861"
+        rpy="0 0 0" />
+      <mass
+        value="0.0423978040288959" />
+      <inertia
+        ixx="6.0395321302961E-06"
+        ixy="2.21085773086358E-08"
+        ixz="-1.23548421743235E-08"
+        iyy="2.33068868317964E-05"
+        iyz="-1.71821350182808E-08"
+        izz="2.22762196421545E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://pug_description/meshes/thigh_Link_2.STL" />
+      </geometry>
+      <material
+        name="black">
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://pug_description/meshes/thigh_Link_2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="lf_thigh"
+    type="revolute">
+    <origin
+      xyz="0.050886 0.00035627 0.00031403"
+      rpy="-1.5621 0.78534 -1.5576" />
+    <parent
+      link="joint_Link_2" />
+    <child
+      link="thigh_Link_2" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-2"
+      upper="2"
+      effort="${joint_effort}"
+      velocity="2" />
+  </joint>
+  <link
+    name="calf_Link_2">
+    <inertial>
+      <origin
+        xyz="0.00158560429206764 0.0544835351413612 -0.000183981824724316"
+        rpy="0 0 0" />
+      <mass
+        value="0.00991965217602453" />
+      <inertia
+        ixx="1.15008385674942E-05"
+        ixy="2.27624680994217E-07"
+        ixz="2.2799503397094E-10"
+        iyy="4.9879913679058E-07"
+        iyz="-4.05172339362056E-09"
+        izz="1.16263690921102E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://pug_description/meshes/calf_Link_2.STL" />
+      </geometry>
+      <material
+        name="black">
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://pug_description/meshes/calf_Link_2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="lf_calf"
+    type="revolute">
+    <origin
+      xyz="0.083 0 0"
+      rpy="-1.3962E-05 0 3.1416" />
+    <parent
+      link="thigh_Link_2" />
+    <child
+      link="calf_Link_2" />
+    <axis
+      xyz="-1.3962E-05 0 1" />
+    <limit
+      lower="-2"
+      upper="2"
+      effort="${joint_effort}"
+      velocity="2" />
+  </joint>
+  <link
+    name="joint_Link_4">
+    <inertial>
+      <origin
+        xyz="0.0233420534805394 0.00578490115737765 0.0134338318184144"
+        rpy="0 0 0" />
+      <mass
+        value="0.0387120488082542" />
+      <inertia
+        ixx="9.59533831427848E-06"
+        ixy="7.74803672201514E-07"
+        ixz="8.88913623633113E-07"
+        iyy="1.26616685043143E-05"
+        iyz="-4.09588923923143E-07"
+        izz="8.285244638669E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://pug_description/meshes/joint_Link_4.STL" />
+      </geometry>
+      <material
+        name="black">
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://pug_description/meshes/joint_Link_4.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="lb_joint"
+    type="revolute">
+    <origin
+      xyz="-0.099775 0.024279 0.019551"
+      rpy="1.5708 0.0029048 1.5708" />
+    <parent
+      link="base_link" />
+    <child
+      link="joint_Link_4" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-2"
+      upper="2"
+      effort="${joint_effort}"
+      velocity="2" />
+  </joint>
+  <link
+    name="thigh_Link_4">
+    <inertial>
+      <origin
+        xyz="0.0114500896867631 0.0058345126361404 -0.000400436808059249"
+        rpy="0 0 0" />
+      <mass
+        value="0.0460112138201101" />
+      <inertia
+        ixx="3.77038974801398E-06"
+        ixy="1.19455703074516E-07"
+        ixz="-5.308465773232E-09"
+        iyy="1.65057724241958E-05"
+        iyz="-8.81752237570585E-09"
+        izz="1.50218037881471E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://pug_description/meshes/thigh_Link_4.STL" />
+      </geometry>
+      <material
+        name="black">
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://pug_description/meshes/thigh_Link_4.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="lb_thigh"
+    type="revolute">
+    <origin
+      xyz="0.0509011483017192 0.000447100771562375 0"
+      rpy="-1.57075613861719 0.785398113759983 -1.56201284588036" />
+    <parent
+      link="joint_Link_4" />
+    <child
+      link="thigh_Link_4" />
+    <axis
+      xyz="0 4.01883026989545E-05 0.99999999919245" />
+    <limit
+      lower="-2"
+      upper="2"
+      effort="${joint_effort}"
+      velocity="2" />
+  </joint>
+  <link
+    name="calf_Link_4">
+    <inertial>
+      <origin
+        xyz="0.00158600965099735 0.0544835234595278 -0.000183940221196388"
+        rpy="0 0 0" />
+      <mass
+        value="0.00991965219361632" />
+      <inertia
+        ixx="1.15008419107433E-05"
+        ixy="2.27543906823477E-07"
+        ixz="2.24674548919337E-10"
+        iyy="4.98795791709181E-07"
+        iyz="-4.04575846836593E-09"
+        izz="1.16263691111368E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://pug_description/meshes/calf_Link_4.STL" />
+      </geometry>
+      <material
+        name="black">
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://pug_description/meshes/calf_Link_4.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="lb_calf"
+    type="revolute">
+    <origin
+      xyz="0.0829997638850299 0 0"
+      rpy="0 0 -3.14158954617731" />
+    <parent
+      link="thigh_Link_4" />
+    <child
+      link="calf_Link_4" />
+    <axis
+      xyz="-4.01881615626045E-05 0 0.999999999192456" />
+    <limit
+      lower="-2"
+      upper="2"
+      effort="${joint_effort}"
+      velocity="2" />
+  </joint>
+  <link
+    name="joint_Link_1">
+    <inertial>
+      <origin
+        xyz="0.0192751912000699 0.00267372388862822 -0.0104216583236867"
+        rpy="0 0 0" />
+      <mass
+        value="0.0439101862118274" />
+      <inertia
+        ixx="1.13613011094214E-05"
+        ixy="2.8793065145057E-07"
+        ixz="-1.92235050185605E-07"
+        iyy="1.30497354251513E-05"
+        iyz="3.94372670646943E-07"
+        izz="6.37290843446983E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://pug_description/meshes/joint_Link_1.STL" />
+      </geometry>
+      <material
+        name="black">
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://pug_description/meshes/joint_Link_1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rf_joint"
+    type="revolute">
+    <origin
+      xyz="0.078609 -0.024287 0.019551"
+      rpy="1.5708 -0.0018486 -1.5708" />
+    <parent
+      link="base_link" />
+    <child
+      link="joint_Link_1" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-2"
+      upper="2"
+      effort="${joint_effort}"
+      velocity="2" />
+  </joint>
+  <link
+    name="thigh_Link_1">
+    <inertial>
+      <origin
+        xyz="0.011450767681586 -0.00583408665454214 -0.000402372393721775"
+        rpy="0 0 0" />
+      <mass
+        value="0.0460111545955486" />
+      <inertia
+        ixx="3.77037922288985E-06"
+        ixy="-1.19544241099158E-07"
+        ixz="-5.66776331340884E-09"
+        iyy="1.65056080498045E-05"
+        iyz="8.83118121222394E-09"
+        izz="1.50217119800764E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://pug_description/meshes/thigh_Link_1.STL" />
+      </geometry>
+      <material
+        name="black">
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://pug_description/meshes/thigh_Link_1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rf_thigh"
+    type="revolute">
+    <origin
+      xyz="0.050887734547246 0 0"
+      rpy="-1.57081028885596 -0.785393895653351 -1.57077658138295" />
+    <parent
+      link="joint_Link_1" />
+    <child
+      link="thigh_Link_1" />
+    <axis
+      xyz="0 -1.39620610260635E-05 0.99999999990253" />
+    <limit
+      lower="-2"
+      upper="2"
+      effort="${joint_effort}"
+      velocity="2" />
+  </joint>
+  <link
+    name="calf_Link_1">
+    <inertial>
+      <origin
+        xyz="0.0544835416360247 0.00158538841732137 -0.000184006668840983"
+        rpy="0 0 0" />
+      <mass
+        value="0.00991965204894401" />
+      <inertia
+        ixx="4.98800877158788E-07"
+        ixy="2.27667672693986E-07"
+        ixz="-4.05535048718797E-09"
+        iyy="1.15008366906196E-05"
+        iyz="2.29625798682368E-10"
+        izz="1.16263689538039E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://pug_description/meshes/calf_Link_1.STL" />
+      </geometry>
+      <material
+        name="black">
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://pug_description/meshes/calf_Link_1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rf_calf"
+    type="revolute">
+    <origin
+      xyz="0.0830003740077802 0 0"
+      rpy="1.39621675210012E-05 0 1.57080023996814" />
+    <parent
+      link="thigh_Link_1" />
+    <child
+      link="calf_Link_1" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-2"
+      upper="2"
+      effort="${joint_effort}"
+      velocity="2" />
+  </joint>
+  <link
+    name="joint_Link_3">
+    <inertial>
+      <origin
+        xyz="0.0187643577659699 0.00353948802517626 -0.0122273880008276"
+        rpy="0 0 0" />
+      <mass
+        value="0.0344729725507935" />
+      <inertia
+        ixx="8.38359137467699E-06"
+        ixy="3.14359191849108E-07"
+        ixz="-4.12855308966321E-07"
+        iyy="1.01997363953637E-05"
+        iyz="2.79271436547655E-07"
+        izz="5.83269414529244E-06" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://pug_description/meshes/joint_Link_3.STL" />
+      </geometry>
+      <material
+        name="black">
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://pug_description/meshes/joint_Link_3.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rb_joint"
+    type="revolute">
+    <origin
+      xyz="-0.099775 -0.024287 0.019551"
+      rpy="1.5708 0.0014455 -1.5708" />
+    <parent
+      link="base_link" />
+    <child
+      link="joint_Link_3" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-2"
+      upper="2"
+      effort="${joint_effort}"
+      velocity="2" />
+  </joint>
+  <link
+    name="thigh_Link_3">
+    <inertial>
+      <origin
+        xyz="0.0115006632755818 -0.0057345050165622 -0.000400045844470086"
+        rpy="0 0 0" />
+      <mass
+        value="0.0460111465351345" />
+      <inertia
+        ixx="4.06431330131546E-06"
+        ixy="-2.30008034541848E-07"
+        ixz="-3.4389232175075E-07"
+        iyy="1.71861703116799E-05"
+        iyz="9.40515704505382E-09"
+        izz="1.54144764973379E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://pug_description/meshes/thigh_Link_3.STL" />
+      </geometry>
+      <material
+        name="black">
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://pug_description/meshes/thigh_Link_3.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rb_thigh"
+    type="revolute">
+    <origin
+      xyz="0.050902 0.00035826 0"
+      rpy="-1.5708 -0.79412 -1.5638" />
+    <parent
+      link="joint_Link_3" />
+    <child
+      link="thigh_Link_3" />
+    <axis
+      xyz="-3.9836E-05 -4.0537E-05 1" />
+    <limit
+      lower="-2"
+      upper="2"
+      effort="${joint_effort}"
+      velocity="2" />
+  </joint>
+  <link
+    name="calf_Link_3">
+    <inertial>
+      <origin
+        xyz="0.0544835416069041 0.00158538840084763 -0.000184006667819481"
+        rpy="0 0 0" />
+      <mass
+        value="0.00991965206939628" />
+      <inertia
+        ixx="4.98800878376388E-07"
+        ixy="2.27667676999537E-07"
+        ixz="-4.05535048071149E-09"
+        iyy="1.15008367016331E-05"
+        iyz="2.29626490415393E-10"
+        izz="1.16263689630963E-05" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://pug_description/meshes/calf_Link_3.STL" />
+      </geometry>
+      <material
+        name="black">
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://pug_description/meshes/calf_Link_3.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rb_calf"
+    type="revolute">
+    <origin
+      xyz="0.082997 0.00072404 0"
+      rpy="0 0 1.5795" />
+    <parent
+      link="thigh_Link_3" />
+    <child
+      link="calf_Link_3" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-2"
+      upper="2"
+      effort="${joint_effort}"
+      velocity="2" />
+  </joint>
+</robot>

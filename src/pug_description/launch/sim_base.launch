@@ -1,0 +1,7 @@
+<launch>
+    <include file="$(find pug_peripherals)/launch/imu.launch">
+        <arg name="enable_sim"        value="true"/>
+    </include>
+    <node name="pug_control" pkg="pug_control" type="pug_node.py" required="false" output="screen"/>
+    <include file="$(find pug_peripherals)/launch/joystick_control.launch"/>
+</launch>

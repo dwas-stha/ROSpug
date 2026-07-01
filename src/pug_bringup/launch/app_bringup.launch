@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<launch>
+    <include file="$(find pug_bringup)/launch/base.launch"/> 
+    #ok
+    <include file="$(find pug_bringup)/launch/rosbridge.launch" />
+    <include file="$(find pug_app)/launch/apriltag_detect.launch"/>
+    <include file="$(find pug_app)/launch/face_detect.launch"/>
+    <include file="$(find pug_app)/launch/object_tracking.launch"/>
+    <include file="$(find pug_app)/launch/visual_patrol.launch"/>
+    <include file="$(find pug_app)/launch/self_balancing.launch"/>
+    <include file="$(find pug_app)/launch/lidar_app.launch"/>
+    <include file="$(find pug_app)/launch/hand_gesture.launch"/>
+    <include file="$(find pug_app)/launch/performance.launch"/>
+</launch>

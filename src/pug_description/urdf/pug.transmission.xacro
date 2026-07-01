@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+<robot name="pug" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:macro name="transmission_block" params="joint_name">
+    <transmission name="${joint_name}_trans">
+      <type>transmission_interface/SimpleTransmission</type>
+      <joint name="${joint_name}">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      </joint>
+      <actuator name="${joint_name}_motor">
+        <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        <mechanicalReduction>1</mechanicalReduction>
+      </actuator>
+    </transmission>
+  </xacro:macro>
+
+  <xacro:transmission_block joint_name="rf_joint"/>
+  <xacro:transmission_block joint_name="lf_joint"/>
+  <xacro:transmission_block joint_name="rb_joint"/>
+  <xacro:transmission_block joint_name="lb_joint"/>
+  <xacro:transmission_block joint_name="rf_thigh"/>
+  <xacro:transmission_block joint_name="lf_thigh"/>
+  <xacro:transmission_block joint_name="rb_thigh"/>
+  <xacro:transmission_block joint_name="lb_thigh"/>
+  <xacro:transmission_block joint_name="rf_calf"/>
+  <xacro:transmission_block joint_name="lf_calf"/>
+  <xacro:transmission_block joint_name="rb_calf"/>
+  <xacro:transmission_block joint_name="lb_calf"/>
+</robot>

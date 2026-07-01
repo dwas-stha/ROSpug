@@ -1,0 +1,6 @@
+<?xml version="1.0" ?>
+<launch>
+    <include file="$(find pug_peripherals)/launch/camera.launch"/>
+    <include file="$(find pug_peripherals)/launch/imu.launch"/>
+    <include file="$(find pug_control)/launch/pug_control.launch"/>
+</launch>

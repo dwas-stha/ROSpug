@@ -1,0 +1,5 @@
+<?xml version="1.0" ?>
+<launch>
+    <node name="hand_gesture" pkg="pug_app" type="hand_gesture.py" output="screen" respawn="false" />
+    <node name="hand_trajectory" pkg="pug_app" type="hand_trajectory_node.py" output="screen" respawn="false" />
+</launch>

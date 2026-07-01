@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<launch>
+    <arg name="enable_sim"    default="False"/>
+    <!--机器人urdf模型加载-->
+    <param name="robot_description" command="$(find xacro)/xacro '$(find pug_description)/urdf/pug.urdf.xacro'" />
+    <!-- 运行joint_state_publisher节点，发布机器人的关节状态"/joint_states" -->
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+    <!-- 运行robot_state_publisher节点，发布tf  -->
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher"/>
+
+    <node name="pug_control" pkg="pug_control" type="pug_node.py" required="false" output="screen">
+        <param name="enable_sim"        value="$(arg enable_sim)"/>
+    </node>
+</launch>

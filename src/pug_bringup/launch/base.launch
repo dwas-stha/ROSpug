@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<launch>
+    <include file="$(find pug_bringup)/launch/driver.launch"/>
+    <include file="$(find lab_config)/launch/lab_config_manager.launch"/>
+    <include file="$(find pug_peripherals)/launch/joystick_control.launch"/>
+    <include file="$(find pug_peripherals)/launch/lidar.launch" />
+    <include file="$(find pug_peripherals)/launch/oled_display.launch" />
+</launch>

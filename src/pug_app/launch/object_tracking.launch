@@ -1,0 +1,4 @@
+<?xml version="1.0" ?>
+<launch>
+	<node name="object_tracking" pkg="pug_app" type="object_tracking.py" output="screen" respawn="false"/>
+</launch>

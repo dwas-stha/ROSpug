@@ -1,0 +1,67 @@
+pug:
+  # Position Controllers ---------------------------------------
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 100
+
+  # Position Controllers ---------------------------------------
+  rf_joint_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: rf_joint
+    pid: {p: 3.0, i: 0, d: 0, i_clamp_min: -1000, i_clamp_max: 1000}
+
+  rf_calf_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: rf_calf
+    pid: {p: 3.0, i: 0, d: 0, i_clamp_min: -1000, i_clamp_max: 1000}
+
+  rf_thigh_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: rf_thigh
+    pid: {p: 3.0, i: 0, d: 0, i_clamp_min: -1000, i_clamp_max: 1000}
+
+  lf_joint_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: lf_joint
+    pid: {p: 3.0, i: 0, d: 0, i_clamp_min: -1000, i_clamp_max: 1000}
+
+  lf_calf_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: lf_calf
+    pid: {p: 3.0, i: 0, d: 0, i_clamp_min: -1000, i_clamp_max: 1000}
+
+  lf_thigh_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: lf_thigh
+    pid: {p: 3.0, i: 0, d: 0, i_clamp_min: -1000, i_clamp_max: 1000}
+
+  rb_joint_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: rb_joint
+    pid: {p: 3.0, i: 0, d: 0, i_clamp_min: -1000, i_clamp_max: 1000}
+
+  rb_calf_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: rb_calf
+    pid: {p: 3.0, i: 0, d: 0, i_clamp_min: -1000, i_clamp_max: 1000}
+
+  rb_thigh_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: rb_thigh
+    pid: {p: 3.0, i: 0, d: 0, i_clamp_min: -1000, i_clamp_max: 1000}
+
+  lb_joint_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: lb_joint
+    pid: {p: 3.0, i: 0, d: 0, i_clamp_min: -1000, i_clamp_max: 1000}
+
+  lb_calf_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: lb_calf
+    pid: {p: 3.0, i: 0, d: 0, i_clamp_min: -1000, i_clamp_max: 1000}
+
+  lb_thigh_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: lb_thigh
+    pid: {p: 3.0, i: 0, d: 0, i_clamp_min: -1000, i_clamp_max: 1000}
+
