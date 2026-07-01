@@ -1,0 +1,9 @@
+<launch>
+    <node pkg="pug_digital_twin"
+          type="bus_servo_joint_state_bridge.py"
+          name="bus_servo_joint_state_bridge"
+          output="screen">
+        <param name="rate" value="20" />
+    </node>
+</launch>
+

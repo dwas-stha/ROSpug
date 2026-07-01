@@ -1,0 +1,41 @@
+<launch>
+    <node pkg="pug_digital_twin"
+          type="bus_servo_joint_state_bridge.py"
+          name="bus_servo_joint_state_bridge"
+          output="screen">
+        <param name="rate" value="20" />
+    </node>
+
+    <node pkg="pug_digital_twin"
+          type="body_pose_estimator.py"
+          name="body_pose_estimator"
+          output="screen">
+
+        <param name="joint_topic" value="/joint_states_real" />
+        <param name="imu_topic" value="/imu" />
+
+        <param name="base_frame" value="base_footprint" />
+        <param name="odom_frame" value="odom" />
+        <param name="child_frame" value="base_footprint" />
+
+        <param name="publish_rate" value="20.0" />
+        <param name="filter_alpha" value="0.5" />
+        <param name="foot_ground_offset" value="0.0" />
+        <param name="support_threshold" value="0.015" />
+        <param name="min_support_feet" value="4" />
+        <param name="lock_world_yaw" value="true" /> 
+        <!-- Change these if tilt is opposite -->
+        <param name="roll_sign" value="1.0" />
+        <param name="pitch_sign" value="1.0" />
+        <param name="yaw_sign" value="-1.0" />
+
+        <param name="use_imu_yaw" value="true" />
+
+        <rosparam param="foot_offsets">
+            calf_Link_1: [0.085, 0.0, 0.0]
+            calf_Link_2: [0.0, 0.085, 0.0]
+            calf_Link_3: [0.085, 0.0, 0.0]
+            calf_Link_4: [0.0, 0.085, 0.0]
+        </rosparam>
+    </node>
+</launch>
